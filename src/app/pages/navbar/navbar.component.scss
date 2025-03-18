@@ -1,0 +1,54 @@
+@use "@angular/material" as mat;
+
+$primary-brown: #6d4c41; // Brown
+$light-brown: #8d6e63; // Light Brown
+$off-white: #f5f5f5; // Off-white
+$hover-brown: #5d4037; // Darker hover brown
+
+.logo {
+  font-size: 1.2rem;
+  font-weight: bold;
+  padding-left: 10px;
+  color: $off-white;
+}
+
+.spacer {
+  flex: 1 1 auto;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 20px;
+}
+
+.sidenav-container {
+  height: 100vh;
+}
+
+mat-toolbar {
+  background-color: $primary-brown !important;
+  color: $off-white !important;
+}
+
+mat-sidenav {
+  background-color: $light-brown;
+  color: $off-white;
+}
+
+mat-nav-list a {
+  color: $off-white;
+  text-decoration: none;
+}
+
+mat-nav-list a:hover {
+  background-color: $hover-brown;
+}
+
+:root {
+  @include mat.button-overrides(
+    (
+      filled-container-color: white,
+      filled-label-text-color: white,
+    )
+  );
+}

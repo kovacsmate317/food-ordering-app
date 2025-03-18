@@ -1,0 +1,55 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- MOBILE: Sidebar Navigation -->
+  <mat-sidenav #sidenav mode="over" *ngIf="isMobile()">
+    <mat-nav-list>
+      <a
+        mat-list-item
+        routerLink="/"
+        routerLinkActive="active"
+        (click)="sidenav.close()"
+        >Home</a
+      >
+      <a
+        mat-list-item
+        routerLink="/cart"
+        routerLinkActive="active"
+        (click)="sidenav.close()"
+        >Cart</a
+      >
+      <a
+        mat-list-item
+        routerLink="/about"
+        routerLinkActive="active"
+        (click)="sidenav.close()"
+        >About</a
+      >
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <!-- Main Content Area -->
+  <mat-sidenav-content>
+    <!-- MOBILE: Show Topbar When Sidebar is Hidden -->
+    <mat-toolbar color="primary" *ngIf="isMobile()">
+      <button mat-icon-button (click)="sidenav.toggle()">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span class="logo">MyApp</span>
+    </mat-toolbar>
+
+    <!-- DESKTOP: Show Regular Navigation -->
+    <mat-toolbar color="primary" *ngIf="!isMobile()">
+      <span class="logo">MyApp</span>
+      <span class="spacer"></span>
+      <nav class="navbar-links">
+        <a mat-button routerLink="/" routerLinkActive="active">Home</a>
+        <a mat-button routerLink="/cart" routerLinkActive="active">Cart</a>
+        <a mat-button routerLink="/about" routerLinkActive="active">About</a>
+      </nav>
+    </mat-toolbar>
+
+    <!-- Page Content (Router Outlet) -->
+    <div class="content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
