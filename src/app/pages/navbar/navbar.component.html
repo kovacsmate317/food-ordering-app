@@ -18,6 +18,13 @@
       >
       <a
         mat-list-item
+        routerLink="/login"
+        routerLinkActive="active"
+        (click)="sidenav.close()"
+        >Login</a
+      >
+      <a
+        mat-list-item
         routerLink="/about"
         routerLinkActive="active"
         (click)="sidenav.close()"
@@ -43,6 +50,7 @@
       <nav class="navbar-links">
         <a mat-button routerLink="/" routerLinkActive="active">Home</a>
         <a mat-button routerLink="/cart" routerLinkActive="active">Cart</a>
+        <a mat-button routerLink="/login" routerLinkActive="active">Login</a>
         <a mat-button routerLink="/about" routerLinkActive="active">About</a>
       </nav>
     </mat-toolbar>

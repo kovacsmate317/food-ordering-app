@@ -1,0 +1,65 @@
+$primary-brown: #9d8a84;
+$hover-brown: #7b594e;
+$off-white: #f5f5f5;
+
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: $primary-brown;
+
+  .auth-box {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
+    text-align: center;
+    animation: fadeIn 0.5s ease-in-out;
+
+    h2 {
+      color: $hover-brown;
+    }
+
+    mat-form-field {
+      width: 100%;
+      margin-bottom: 15px;
+    }
+
+    .login-btn {
+      width: 100%;
+      background: $hover-brown;
+      color: $off-white;
+      transition: 0.3s;
+
+      &:hover {
+        background: darken($hover-brown, 10%);
+      }
+    }
+
+    .switch {
+      margin-top: 10px;
+
+      a {
+        color: $hover-brown;
+        text-decoration: none;
+        transition: 0.3s;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

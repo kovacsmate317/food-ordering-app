@@ -1,0 +1,29 @@
+<div class="auth-container">
+  <div class="auth-box">
+    <h2>Register</h2>
+    <form (submit)="onRegister()">
+      <mat-form-field appearance="outline">
+        <mat-label>Full Name</mat-label>
+        <input matInput type="text" [(ngModel)]="name" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Email</mat-label>
+        <input matInput type="email" [(ngModel)]="email" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput type="password" [(ngModel)]="password" required />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" class="register-btn">
+        Register
+      </button>
+      <p class="switch">
+        Already have an account?
+        <a routerLink="/login" routerLinkActive="active">Login</a>
+      </p>
+    </form>
+  </div>
+</div>
