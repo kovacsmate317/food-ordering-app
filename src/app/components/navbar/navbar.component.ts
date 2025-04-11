@@ -31,7 +31,7 @@ export class NavbarComponent {
 
   constructor(private breakpointObserver: BreakpointObserver) {
     this.breakpointObserver
-      .observe([Breakpoints.Handset])
+      .observe(['(max-width: 860px)'])
       .subscribe((result) => {
         this.isMobile.set(result.matches);
       });

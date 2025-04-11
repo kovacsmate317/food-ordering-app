@@ -1,4 +1,10 @@
 <section class="hero">
+  <div class="hero-text">
+    <h1>Welcome to New Colorado Restaurant</h1>
+    <p>Delicious food, great drinks, and amazing service await you.</p>
+    <button class="cta-button" routerLink="/menu">View Menu</button>
+  </div>
+
   <div class="carousel-container">
     <div
       class="carousel-slide"
@@ -8,16 +14,21 @@
       <img [src]="slide.image" alt="Restaurant Image" />
     </div>
 
-    <!-- Buttons -->
     <button class="prev" (click)="prevSlide()">&#10094;</button>
     <button class="next" (click)="nextSlide()">&#10095;</button>
   </div>
+</section>
 
-  <div class="hero-text">
-    <h1>Welcome to New Colorado Restaurant</h1>
+<section class="events">
+  <h2>Upcoming Events</h2>
+  <div class="event">
+    <h3>Live Jazz Night</h3>
+    <p>Enjoy smooth jazz with delicious meals every Friday at 7 PM.</p>
+  </div>
+  <div class="event">
+    <h3>Weekend Brunch Special</h3>
     <p>
-      Your perfect dining experience for delicious food, great drinks, and
-      amazing service.
+      Unlimited mimosas and breakfast favorites every Sunday from 10 AM - 2 PM.
     </p>
   </div>
 </section>

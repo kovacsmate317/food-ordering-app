@@ -1,16 +1,128 @@
-@import "../login/login.component.scss";
-
-.auth-box {
-  animation: slideIn 0.5s ease-in-out;
+/* Overlay covers the entire viewport */
+.auth-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6); /* Dimmed background */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
 }
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateX(-20px);
+/* Modal container with refined brownish palette */
+.auth-modal {
+  background: #f7f2e9; /* Soft beige */
+  border-radius: 16px;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px; /* Wider modal */
+  min-width: 320px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  color: #4b3f3b; /* Dark brown text */
+  overflow: visible;
+}
+
+/* Header */
+.auth-modal h2 {
+  margin-bottom: 20px;
+  font-size: 2rem;
+  text-align: center;
+  color: #5f4b3a;
+  font-weight: bold;
+}
+
+/* Input groups with floating labels */
+.input-group {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 14px 12px;
+  border: 1px solid #d1a78c; /* Light brown border */
+  border-radius: 8px;
+  background: #fff8f2;
+  font-size: 1rem;
+  color: #4b3f3b;
+}
+
+.input-group input:focus {
+  border-color: #9c6d58;
+  outline: none;
+}
+
+.input-group label {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9c6d58;
+  font-size: 1rem;
+  pointer-events: none;
+  transition: all 0.2s ease-out;
+}
+
+.input-group input:focus + label,
+.input-group input:not(:placeholder-shown) + label {
+  top: -8px;
+  background: #f7f2e9;
+  padding: 0 4px;
+  font-size: 0.85rem;
+  color: #5f4b3a;
+}
+
+/* Register button styling */
+.register-btn {
+  width: 100%;
+  padding: 14px;
+  background: #9c6d58;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  color: #fff;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.register-btn:hover {
+  background: #7f4e33;
+}
+
+/* Switch text */
+.switch {
+  margin-top: 15px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.switch a {
+  color: #9c6d58;
+  text-decoration: none;
+}
+
+.switch a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+  .auth-modal {
+    width: 90%;
+    padding: 30px;
+    max-width: 400px;
   }
-  to {
-    opacity: 1;
-    transform: translateX(0);
+  .auth-modal h2 {
+    font-size: 1.8rem;
+  }
+  .input-group input {
+    padding: 12px;
+  }
+  .register-btn {
+    padding: 12px;
+    font-size: 1rem;
   }
 }

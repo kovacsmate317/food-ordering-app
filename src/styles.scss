@@ -4,9 +4,17 @@
   box-sizing: border-box;
 }
 
+html,
 body {
-  font-family: Arial, sans-serif;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body,
+html,
+mat-sidenav-container,
+mat-sidenav,
+mat-toolbar,
+mat-drawer-content {
+  margin: 0 !important;
+  padding: 0 !important;
+}
