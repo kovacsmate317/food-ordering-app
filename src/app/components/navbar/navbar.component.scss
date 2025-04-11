@@ -3,17 +3,22 @@
 $primary-brown: #6d4c41; // Brown
 $light-brown: #8d6e63; // Light Brown
 $off-white: #f5f5f5; // Off-white
-$hover-brown: #5d4037; // Darker hover brown
+$hover-brown: #563b33; // Darker hover brown
 
 .logo {
   font-size: 1.2rem;
   font-weight: bold;
   padding-left: 10px;
   color: $off-white;
+  cursor: pointer;
 }
 
 .spacer {
   flex: 1 1 auto;
+}
+
+a {
+  height: 100%;
 }
 
 .navbar-links {
@@ -26,7 +31,7 @@ $hover-brown: #5d4037; // Darker hover brown
 }
 
 mat-toolbar {
-  background-color: $primary-brown !important;
+  background-color: $light-brown !important;
   color: $off-white !important;
 }
 
@@ -42,6 +47,11 @@ mat-nav-list a {
 
 mat-nav-list a:hover {
   background-color: $hover-brown;
+}
+
+.active {
+  font-weight: bold;
+  background-color: $primary-brown;
 }
 
 :root {

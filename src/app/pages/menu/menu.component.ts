@@ -16,21 +16,35 @@ export class MenuComponent {
       description: 'A hot and crispy chicken burger.',
       price: 7.99,
       spicyLevel: 3,
-      image: 'assets/chicken-burger.jpg',
+      image: 'products/burger.jpg',
     },
     {
       name: 'Cheesy Pizza',
       description: 'Loaded with mozzarella and cheddar.',
       price: 9.99,
       spicyLevel: 1,
-      image: 'assets/pizza.jpg',
+      image: 'products/pizza.jpg',
     },
     {
       name: 'BBQ Ribs',
       description: 'Tender ribs with BBQ sauce.',
       price: 12.99,
       spicyLevel: 2,
-      image: 'assets/ribs.jpg',
+      image: 'products/bbqribs.jpg',
+    },
+    {
+      name: 'BBQ Ribs',
+      description: 'Tender ribs with BBQ sauce.',
+      price: 12.99,
+      spicyLevel: 2,
+      image: 'products/bbqribs.jpg',
+    },
+    {
+      name: 'BBQ Ribs',
+      description: 'Tender ribs with BBQ sauce.',
+      price: 12.99,
+      spicyLevel: 2,
+      image: 'products/bbqribs.jpg',
     },
   ];
 

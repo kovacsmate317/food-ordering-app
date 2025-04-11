@@ -1,7 +1,39 @@
-.menu {
+.menu-wrapper {
+  display: flex;
+  justify-content: center;
+  padding: 1rem;
+  width: 100%; /* Ensure the wrapper takes full width */
+}
+
+.products {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  padding: 1rem;
+  gap: 1.5rem;
+  width: 100%;
+  max-width: 1400px; /* This max-width is flexible */
+  justify-content: center; /* Ensure the cards inside are centered */
+  align-items: flex-start;
+}
+
+.product-card {
+  width: 280px;
+  flex-shrink: 0;
+}
+
+@media (min-width: 600px) {
+  .products {
+    max-width: 90%; /* On medium screens, container is flexible but not too wide */
+  }
+}
+
+@media (min-width: 960px) {
+  .products {
+    max-width: 1200px; /* On larger screens, the container can stretch up to 1200px */
+  }
+}
+
+@media (min-width: 1200px) {
+  .products {
+    max-width: 1400px; /* On very large screens, allow even more width */
+  }
 }

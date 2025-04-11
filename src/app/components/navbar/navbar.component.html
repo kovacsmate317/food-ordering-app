@@ -1,10 +1,9 @@
 <mat-sidenav-container class="sidenav-container">
-  <!-- MOBILE: Sidebar Navigation -->
   <mat-sidenav #sidenav mode="over" *ngIf="isMobile()">
     <mat-nav-list>
       <a
         mat-list-item
-        routerLink="/"
+        routerLink="/home"
         routerLinkActive="active"
         (click)="sidenav.close()"
         >Home</a
@@ -40,22 +39,21 @@
     </mat-nav-list>
   </mat-sidenav>
 
-  <!-- Main Content Area -->
   <mat-sidenav-content>
-    <!-- MOBILE: Show Topbar When Sidebar is Hidden -->
     <mat-toolbar color="primary" *ngIf="isMobile()">
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <span class="logo">MyApp</span>
+      <a routerLink="/home" class="logo-link">
+        <span class="logo">MyApp</span>
+      </a>
     </mat-toolbar>
 
-    <!-- DESKTOP: Show Regular Navigation -->
     <mat-toolbar color="primary" *ngIf="!isMobile()">
-      <span class="logo">MyApp</span>
+      <span class="logo" routerLink="/home">MyApp</span>
       <span class="spacer"></span>
       <nav class="navbar-links">
-        <a mat-button routerLink="/" routerLinkActive="active">Home</a>
+        <a mat-button routerLink="/home" routerLinkActive="active">Home</a>
         <a mat-button routerLink="/menu" routerLinkActive="active">Menu</a>
         <a mat-button routerLink="/cart" routerLinkActive="active">Cart</a>
         <a mat-button routerLink="/login" routerLinkActive="active">Login</a>
@@ -63,7 +61,6 @@
       </nav>
     </mat-toolbar>
 
-    <!-- Page Content (Router Outlet) -->
     <div class="content">
       <router-outlet></router-outlet>
     </div>

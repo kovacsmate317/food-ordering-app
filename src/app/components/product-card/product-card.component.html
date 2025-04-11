@@ -1,11 +1,20 @@
 <mat-card class="product-card">
-  <img mat-card-image [src]="product.image" alt="{{ product.name }}" />
-  <mat-card-title>{{ product.name }}</mat-card-title>
-  <mat-card-subtitle>{{ product.price | currency }}</mat-card-subtitle>
+  <div class="image-wrapper">
+    <img mat-card-image [src]="product.image" alt="{{ product.name }}" />
+  </div>
+
+  <mat-card-header>
+    <mat-card-title>{{ product.name }}</mat-card-title>
+    <mat-card-subtitle>{{ product.price | currency }}</mat-card-subtitle>
+  </mat-card-header>
+
   <mat-card-content>
-    <p>{{ product.description }}</p>
-    <p>Spiciness: {{ product.spicyLevel | spicy }}</p>
+    <p class="description">{{ product.description }}</p>
+    <p class="spicy-level">
+      🌶️ Spiciness: <strong>{{ product.spicyLevel | spicy }}</strong>
+    </p>
   </mat-card-content>
+
   <mat-card-actions>
     <button mat-raised-button color="primary" (click)="addProduct()">
       Add to Cart
