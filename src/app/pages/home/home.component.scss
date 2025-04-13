@@ -7,40 +7,65 @@
   text-align: center;
   position: relative;
   width: 100%;
-  max-width: 100%; /* Prevent overflow */
-  overflow: hidden; /* Ensure no overflow happens */
+  max-width: 100%;
+  overflow: hidden;
 
   .hero-text {
-    z-index: 2;
-    color: white;
-    font-weight: bold;
-    padding: 20px;
-    background: rgba(0, 0, 0, 0.6);
-    border-radius: 10px;
+    position: absolute;
+    z-index: 50;
+    text-align: center;
+    padding: 1.5rem;
+    background: rgba(45, 31, 25, 0.9);
+    border-radius: 16px;
+    color: #fbe9e7;
+    max-width: 90%;
+    width: fit-content;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    animation: fadeInUp 0.7s ease forwards;
+    opacity: 0;
+    will-change: transform, opacity;
 
     h1 {
-      font-size: 3rem;
-      margin-bottom: 10px;
+      font-size: clamp(1.8rem, 5vw, 3.2rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: #ffe0b2;
+      text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     }
 
     p {
-      font-size: 1.2rem;
-      margin-bottom: 15px;
+      font-size: clamp(1rem, 2.5vw, 1.3rem);
+      margin-bottom: 1.5rem;
+      color: #f5f5f5;
     }
 
     .cta-button {
-      background: #d35400;
-      color: white;
-      padding: 10px 20px;
-      font-size: 1rem;
+      background: #8d6e63;
+      color: #fff;
+      padding: 0.6rem 1.5rem;
+      font-size: clamp(0.85rem, 2vw, 1.1rem);
+      font-weight: 600;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 
       &:hover {
-        background: #e67e22;
+        background: #6d4c41;
+        transform: translateY(-2px);
       }
+    }
+  }
+
+  @keyframes fadeInUp {
+    from {
+      transform: translateY(40px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
     }
   }
 
@@ -72,7 +97,7 @@
         height: 100%;
         object-fit: cover;
         border-radius: 10px;
-        display: block; // Slight rounded corners for a modern look
+        display: block;
       }
     }
 
@@ -82,7 +107,7 @@
       top: 50%;
       font-size: 2rem;
       color: white;
-      background: rgba(0, 0, 0, 0.5);
+      background: rgba(0, 0, 0, 0.1);
       border: none;
       padding: 10px;
       cursor: pointer;
@@ -102,7 +127,6 @@
   }
 }
 
-// Events Section
 .events {
   padding: 50px;
   text-align: center;

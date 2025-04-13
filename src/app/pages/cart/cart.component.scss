@@ -1,0 +1,171 @@
+.cart-container {
+  max-width: 700px;
+  margin: auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.cart-item {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  background: #fefefe;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  position: relative;
+  transition: background 0.3s;
+
+  &:hover {
+    background: #fff3e0;
+  }
+
+  img {
+    width: 80px;
+    height: 80px;
+    border-radius: 8px;
+    object-fit: cover;
+  }
+
+  .details {
+    flex-grow: 1;
+
+    h3 {
+      margin: 0;
+      font-size: 1.2rem;
+      color: #5d4037;
+    }
+
+    p {
+      margin: 0.25rem 0 0.5rem;
+      color: #616161;
+      font-size: 0.95rem;
+    }
+
+    .price-qty {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      .price {
+        font-weight: bold;
+        color: #d84315;
+      }
+
+      .quantity-controls {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        button {
+          padding: 0.3rem 0.7rem;
+          font-size: 1rem;
+          border: none;
+          background: #efebe9;
+          border-radius: 4px;
+          cursor: pointer;
+
+          &:hover {
+            background: #d7ccc8;
+          }
+        }
+
+        span {
+          font-size: 1rem;
+          color: #5d4037;
+        }
+      }
+    }
+  }
+
+  .remove-btn {
+    font-size: 1.2rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #8d6e63;
+
+    &:hover {
+      color: #d84315;
+    }
+  }
+}
+
+.cart-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 1rem;
+  border-top: 1px solid #ddd;
+
+  p {
+    font-size: 1.2rem;
+    color: #4e342e;
+  }
+
+  .order-btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    background: #8d6e63;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #6d4c41;
+    }
+  }
+}
+
+.empty-message-container {
+  text-align: center;
+  margin-top: 4rem;
+  font-size: 1.2rem;
+  color: #aaa;
+  animation: fadeIn 0.5s ease-in-out;
+
+  .empty-message {
+    font-size: 1.5rem;
+    color: #d84315;
+    font-weight: bold;
+    margin-bottom: 1rem;
+
+    .cart-icon {
+      font-size: 2rem;
+      animation: shake 1s infinite alternate;
+    }
+
+    .sad-icon {
+      font-size: 2rem;
+      color: #f44336;
+    }
+  }
+
+  .suggestion {
+    font-size: 1rem;
+    color: #757575;
+    font-style: italic;
+  }
+}
+
+@keyframes shake {
+  0% {
+    transform: translateX(-10px);
+  }
+  100% {
+    transform: translateX(10px);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

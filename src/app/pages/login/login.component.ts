@@ -13,40 +13,28 @@ import { RouterModule } from '@angular/router';
 export class LoginComponent {
   email = '';
   password = '';
-  confirmPassword = '';
-  submitted = false; // Track if the form has been submitted
+  submitted = false;
 
   onSubmit(form: NgForm) {
-    this.submitted = true; // Mark as submitted when button is clicked
+    this.submitted = true;
+    if (form.invalid) return;
 
-    if (form.invalid || this.password !== this.confirmPassword) return;
-
-    // Proceed with form submission logic
-    console.log('Form submitted:', form.value);
+    console.log('Login submitted:', form.value);
   }
 
   getErrorMessage(form: NgForm): string {
     const email = this.email.trim();
     const password = this.password.trim();
-    const confirmPassword = this.confirmPassword.trim();
-
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Check if the email is valid using regex
     if (form.controls['email']?.invalid && this.submitted) {
       if (!emailRegex.test(email)) {
         return 'Please enter a valid email address.';
       }
     }
 
-    // Check if password fields are empty
     if (form.controls['password']?.invalid && this.submitted) {
-      return 'Password fields cannot be empty.';
-    }
-
-    // Check if passwords match
-    if (this.password !== this.confirmPassword && this.submitted) {
-      return 'Passwords do not match.';
+      return 'Password is required.';
     }
 
     return '';

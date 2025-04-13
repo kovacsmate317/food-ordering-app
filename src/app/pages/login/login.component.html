@@ -1,1 +1,32 @@
-<p>registerezz <span routerLink="/register">Register link</span></p>
+<div class="login-container">
+  <div class="left-side">
+    <div class="branding">
+      <img src="colorado_logo.jpg" alt="Logo" class="logo" />
+      <h2>Embrace the Colorado Flavor</h2>
+      <p>Flavor that feels like home.</p>
+    </div>
+  </div>
+
+  <div class="right-side">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="login-form">
+      <h2>Login</h2>
+
+      <label>Email</label>
+      <input type="email" name="email" [(ngModel)]="email" required />
+
+      <label>Password</label>
+      <input type="password" name="password" [(ngModel)]="password" required />
+
+      <button type="submit">Login</button>
+
+      <div class="hint" *ngIf="form.invalid && submitted">
+        {{ getErrorMessage(form) }}
+      </div>
+
+      <p id="login">
+        Don't have an account?
+        <span routerLink="/register" class="link">Register</span>
+      </p>
+    </form>
+  </div>
+</div>

@@ -1,1 +1,37 @@
-<p>cart works!</p>
+<div class="cart-container" *ngIf="cart.length; else empty">
+  <div class="cart-item" *ngFor="let item of cart">
+    <img [src]="item.image" alt="{{ item.name }}" />
+    <div class="details">
+      <h3>{{ item.name }}</h3>
+      <p>{{ item.description }}</p>
+      <div class="price-qty">
+        <span class="price">{{ item.price | currency }}</span>
+        <div class="quantity-controls">
+          <button (click)="decreaseQuantity(item)">−</button>
+          <span>{{ item.quantity }}</span>
+          <button (click)="increaseQuantity(item)">+</button>
+        </div>
+      </div>
+    </div>
+    <button class="remove-btn" (click)="removeItem(item)">🗑️</button>
+  </div>
+
+  <div class="cart-summary">
+    <p>
+      Total: <strong>{{ getTotal() | currency }}</strong>
+    </p>
+    <button class="order-btn">Place Order</button>
+  </div>
+</div>
+
+<ng-template #empty>
+  <div class="empty-message-container">
+    <p class="empty-message">
+      <span class="cart-icon">🛒</span> Oops! Your cart is empty
+      <span class="sad-icon">😢</span>
+    </p>
+    <p class="suggestion">
+      Don't worry, go ahead and add some tasty items to your cart!
+    </p>
+  </div>
+</ng-template>
