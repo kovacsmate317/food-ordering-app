@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgForm } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { User } from '../../types/types';
 
 @Component({
   selector: 'app-login',
@@ -14,15 +15,23 @@ export class RegisterComponent {
   email = '';
   password = '';
   confirmPassword = '';
-  submitted = false; // Track if the form has been submitted
+  submitted = false;
 
   onSubmit(form: NgForm) {
-    this.submitted = true; // Mark as submitted when button is clicked
+    this.submitted = true;
 
-    if (form.invalid || this.password !== this.confirmPassword) return;
+    if (form.invalid || this.password !== this.confirmPassword) {
+      const newUser: User = {
+        email: this.email,
+        password: this.password,
+        role: 'customer',
+        address: '',
+      };
 
-    // Proceed with form submission logic
-    console.log('Form submitted:', form.value);
+      console.log('User registered:', newUser);
+    }
+
+    console.log('Form submitted: (value): ', form.value); //debug
   }
 
   getErrorMessage(form: NgForm): string {
@@ -32,19 +41,16 @@ export class RegisterComponent {
 
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
-    // Check if the email is valid using regex
     if (form.controls['email']?.invalid && this.submitted) {
       if (!emailRegex.test(email)) {
         return 'Please enter a valid email address.';
       }
     }
 
-    // Check if password fields are empty
     if (form.controls['password']?.invalid && this.submitted) {
       return 'Password fields cannot be empty.';
     }
 
-    // Check if passwords match
     if (this.password !== this.confirmPassword && this.submitted) {
       return 'Passwords do not match.';
     }

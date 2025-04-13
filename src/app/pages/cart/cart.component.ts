@@ -1,5 +1,6 @@
 import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
+import { Order } from '../../types/types';
 
 interface CartItem {
   name: string;
@@ -18,6 +19,9 @@ interface CartItem {
 })
 export class CartComponent {
   cart: CartItem[] = [];
+  email: string = 'user123@email.com';
+  deliveryAddress: string = '123 Main St, City, Country';
+  order: Order | null = null;
 
   constructor() {
     const initialItems = [
@@ -84,5 +88,21 @@ export class CartComponent {
 
   removeItem(item: CartItem) {
     this.cart = this.cart.filter((i) => i.name !== item.name);
+  }
+
+  placeOrder() {
+    const totalAmount = parseFloat(this.getTotal());
+    const newOrder: Order = {
+      id: `order-${new Date().getTime()}`,
+      email: this.email,
+      items: this.cart,
+      totalAmount,
+      status: 'pending',
+      orderDate: new Date().toISOString(),
+      deliveryAddress: this.deliveryAddress,
+      paymentStatus: 'pending',
+    };
+    this.order = newOrder;
+    console.log('Order placed:', this.order);
   }
 }
