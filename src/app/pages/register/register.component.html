@@ -1,50 +1,37 @@
-<div class="auth-overlay" *ngIf="isModalVisible" (click)="closeModal()">
-  <div class="auth-modal" (click)="$event.stopPropagation()">
-    <h2>Register</h2>
-    <form (submit)="onRegister()">
-      <!-- Full Name Input -->
-      <div class="input-group">
-        <input
-          type="text"
-          [(ngModel)]="name"
-          name="fullName"
-          required
-          placeholder=" "
-        />
-        <label>Full Name</label>
+<div class="register-container">
+  <div class="left-side">
+    <div class="branding">
+      <img src="colorado_logo.jpg" alt="Logo" class="logo" />
+      <h2>Embrace the Colorado Flavor</h2>
+      <p>Your cravings, delivered in minutes.</p>
+    </div>
+  </div>
+
+  <div class="right-side">
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="register-form">
+      <h2>Register</h2>
+
+      <label>Email</label>
+      <input type="email" name="email" [(ngModel)]="email" required />
+
+      <label>Password</label>
+      <input type="password" name="password" [(ngModel)]="password" required />
+
+      <label>Confirm Password</label>
+      <input
+        type="password"
+        name="confirmPassword"
+        [(ngModel)]="confirmPassword"
+        required
+      />
+
+      <button type="submit">Register</button>
+      <div class="hint" *ngIf="form.invalid || password !== confirmPassword">
+        {{ getErrorMessage(form) }}
       </div>
-
-      <!-- Email Input -->
-      <div class="input-group">
-        <input
-          type="email"
-          [(ngModel)]="email"
-          name="email"
-          required
-          placeholder=" "
-        />
-        <label>Email</label>
-      </div>
-
-      <!-- Password Input -->
-      <div class="input-group">
-        <input
-          type="password"
-          [(ngModel)]="password"
-          name="password"
-          required
-          placeholder=" "
-        />
-        <label>Password</label>
-      </div>
-
-      <!-- Register Button -->
-      <button type="submit" class="register-btn">Register</button>
-
-      <!-- Switch to Login -->
-      <p class="switch">
+      <p id="login">
         Already have an account?
-        <a routerLink="/login" routerLinkActive="active">Login</a>
+        <span routerLink="/login" class="link">Login</span>
       </p>
     </form>
   </div>

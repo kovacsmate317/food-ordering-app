@@ -1,128 +1,119 @@
-/* Overlay covers the entire viewport */
-.auth-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background: rgba(0, 0, 0, 0.6); /* Dimmed background */
+.register-container {
+  display: flex;
+  min-height: 100vh;
+  overflow: hidden; /* Prevent scrolling */
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.error {
+  color: red;
+  font-size: 0.875rem;
+  margin-top: 5px;
+}
+
+.hint {
+  color: red;
+  font-size: 1rem;
+  text-align: center;
+  margin-top: 10px;
+}
+
+.left-side {
+  flex: 1;
+  background: #6b574f;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+
+  .branding {
+    text-align: center;
+
+    .logo {
+      max-width: 100px;
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 0.5rem;
+    }
+
+    p {
+      font-size: 1.1rem;
+      opacity: 0.9;
+    }
+  }
+
+  @media (max-width: 768px) {
+    display: none;
+  }
+}
+
+.right-side {
+  flex: 1;
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 9999;
-}
+  background: #f5f5f5;
+  padding: 2rem;
 
-/* Modal container with refined brownish palette */
-.auth-modal {
-  background: #f7f2e9; /* Soft beige */
-  border-radius: 16px;
-  padding: 40px;
-  width: 100%;
-  max-width: 500px; /* Wider modal */
-  min-width: 320px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  color: #4b3f3b; /* Dark brown text */
-  overflow: visible;
-}
-
-/* Header */
-.auth-modal h2 {
-  margin-bottom: 20px;
-  font-size: 2rem;
-  text-align: center;
-  color: #5f4b3a;
-  font-weight: bold;
-}
-
-/* Input groups with floating labels */
-.input-group {
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.input-group input {
-  width: 100%;
-  padding: 14px 12px;
-  border: 1px solid #d1a78c; /* Light brown border */
-  border-radius: 8px;
-  background: #fff8f2;
-  font-size: 1rem;
-  color: #4b3f3b;
-}
-
-.input-group input:focus {
-  border-color: #9c6d58;
-  outline: none;
-}
-
-.input-group label {
-  position: absolute;
-  left: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #9c6d58;
-  font-size: 1rem;
-  pointer-events: none;
-  transition: all 0.2s ease-out;
-}
-
-.input-group input:focus + label,
-.input-group input:not(:placeholder-shown) + label {
-  top: -8px;
-  background: #f7f2e9;
-  padding: 0 4px;
-  font-size: 0.85rem;
-  color: #5f4b3a;
-}
-
-/* Register button styling */
-.register-btn {
-  width: 100%;
-  padding: 14px;
-  background: #9c6d58;
-  border: none;
-  border-radius: 8px;
-  font-size: 1.1rem;
-  color: #fff;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.register-btn:hover {
-  background: #7f4e33;
-}
-
-/* Switch text */
-.switch {
-  margin-top: 15px;
-  text-align: center;
-  font-size: 0.9rem;
-}
-
-.switch a {
-  color: #9c6d58;
-  text-decoration: none;
-}
-
-.switch a:hover {
-  text-decoration: underline;
-}
-
-/* Responsive adjustments */
-@media (max-width: 600px) {
-  .auth-modal {
-    width: 90%;
-    padding: 30px;
+  .register-form {
+    background: white;
+    padding: 2rem;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 100%;
     max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    h2 {
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    input {
+      padding: 0.75rem;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    button {
+      padding: 0.75rem;
+      background: #6d4c41;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: background 0.3s ease;
+
+      &:disabled {
+        background: #a1887f;
+        cursor: not-allowed;
+      }
+
+      &:hover:not(:disabled) {
+        background: #563b33;
+      }
+    }
   }
-  .auth-modal h2 {
-    font-size: 1.8rem;
-  }
-  .input-group input {
-    padding: 12px;
-  }
-  .register-btn {
-    padding: 12px;
-    font-size: 1rem;
+
+  #login {
+    text-align: center;
+
+    span {
+      text-decoration: underline;
+      cursor: pointer;
+      font-size: medium;
+    }
   }
 }

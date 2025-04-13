@@ -6,19 +6,35 @@ $off-white: #f5f5f5; // Off-white
 $hover-brown: #563b33; // Darker hover brown
 
 .logo {
-  font-size: 1.2rem;
-  font-weight: bold;
-  padding-left: 10px;
+  font-family: "Poppins", sans-serif;
+  font-size: 1.6rem;
+  font-weight: 600;
   color: $off-white;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
   cursor: pointer;
+  transition: color 0.4s ease, transform 0.3s ease, text-shadow 0.3s ease;
+  position: relative;
+  margin-left: 10px;
+
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: 0;
+    width: 0%;
+    height: 2px;
+    background-color: $off-white;
+    transition: width 0.4s ease;
+  }
+
+  &:hover::after {
+    width: 100%;
+  }
 }
 
 .spacer {
   flex: 1 1 auto;
-}
-
-a {
-  height: 100%;
 }
 
 .navbar-links {
@@ -31,7 +47,7 @@ a {
 }
 
 mat-toolbar {
-  background-color: $light-brown !important;
+  background-color: $primary-brown !important;
   color: $off-white !important;
 }
 
@@ -51,7 +67,7 @@ mat-nav-list a:hover {
 
 .active {
   font-weight: bold;
-  background-color: $primary-brown;
+  background-color: $hover-brown;
 }
 
 :root {

@@ -44,13 +44,11 @@
       <button mat-icon-button (click)="sidenav.toggle()">
         <mat-icon>menu</mat-icon>
       </button>
-      <a routerLink="/home" class="logo-link">
-        <span class="logo">MyApp</span>
-      </a>
+      <span class="logo" routerLink="/home">Csaoo</span>
     </mat-toolbar>
 
     <mat-toolbar color="primary" *ngIf="!isMobile()">
-      <span class="logo" routerLink="/home">MyApp</span>
+      <span class="logo" routerLink="/home">Csaoo</span>
       <span class="spacer"></span>
       <nav class="navbar-links">
         <a mat-button routerLink="/home" routerLinkActive="active">Home</a>

@@ -1,42 +1,54 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { FormsModule, NgForm } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NgIf } from '@angular/common';
 
 @Component({
-  selector: 'app-register',
+  selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, RouterModule, NgIf],
+  imports: [CommonModule, FormsModule, RouterModule],
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent {
-  // Form fields
-  name = '';
   email = '';
   password = '';
+  confirmPassword = '';
+  submitted = false; // Track if the form has been submitted
 
-  // Modal visibility state
-  isModalVisible = false;
+  onSubmit(form: NgForm) {
+    this.submitted = true; // Mark as submitted when button is clicked
 
-  // Open modal method
-  openModal() {
-    this.isModalVisible = true;
+    if (form.invalid || this.password !== this.confirmPassword) return;
+
+    // Proceed with form submission logic
+    console.log('Form submitted:', form.value);
   }
 
-  // Close modal method
-  closeModal() {
-    this.isModalVisible = false;
-  }
+  getErrorMessage(form: NgForm): string {
+    const email = this.email.trim();
+    const password = this.password.trim();
+    const confirmPassword = this.confirmPassword.trim();
 
-  // Registration method
-  onRegister() {
-    if (this.name && this.email && this.password) {
-      console.log('Registering:', this.name, this.email, this.password);
-      // Logic to handle registration (e.g., API call)
-      this.closeModal(); // Close the modal after successful registration
-    } else {
-      console.error('Please fill in all fields');
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    // Check if the email is valid using regex
+    if (form.controls['email']?.invalid && this.submitted) {
+      if (!emailRegex.test(email)) {
+        return 'Please enter a valid email address.';
+      }
     }
+
+    // Check if password fields are empty
+    if (form.controls['password']?.invalid && this.submitted) {
+      return 'Password fields cannot be empty.';
+    }
+
+    // Check if passwords match
+    if (this.password !== this.confirmPassword && this.submitted) {
+      return 'Passwords do not match.';
+    }
+
+    return '';
   }
 }
