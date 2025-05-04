@@ -1,9 +1,13 @@
 export interface Product {
+  id: number;
   name: string;
   description: string;
   price: number;
-  spicyLevel: number;
+  spicyLevel?: number;
   image: string;
+  allergens?: string[];
+  ingredients?: string[];
+  category?: string;
 }
 
 export interface CartItem extends Product {

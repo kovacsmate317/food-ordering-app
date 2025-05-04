@@ -1,0 +1,27 @@
+<mat-card class="product-detail-card">
+  <div class="image-wrapper">
+    <img mat-card-image [src]="product?.image" alt="{{ product?.name }}" />
+  </div>
+
+  <mat-card-header>
+    <mat-card-title>{{ product?.name }}</mat-card-title>
+    <mat-card-subtitle>{{ product?.price | currency }}</mat-card-subtitle>
+  </mat-card-header>
+
+  <mat-card-content>
+    <p class="description">{{ product?.description }}</p>
+    <p *ngIf="product?.spicyLevel" class="spicy-level">
+      🌶️ Spiciness: <strong>{{ product?.spicyLevel }}</strong>
+    </p>
+    <p *ngIf="product?.allergens" class="allergens">
+      <strong>Allergens:</strong> {{ product?.allergens?.join(", ") }}
+    </p>
+    <p *ngIf="product?.ingredients" class="ingredients">
+      <strong>Ingredients:</strong> {{ product?.ingredients?.join(", ") }}
+    </p>
+  </mat-card-content>
+
+  <mat-card-actions class="actions">
+    <button mat-raised-button (click)="addToCart()">Add to Cart</button>
+  </mat-card-actions>
+</mat-card>

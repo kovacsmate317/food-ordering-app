@@ -1,0 +1,97 @@
+.product-detail-card {
+  width: 100%;
+  max-width: 800px; /* Increased width for a larger card */
+  margin: 40px auto; /* Added more spacing from top and bottom */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for modern feel */
+  background-color: #fff;
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+
+  &:hover {
+    transform: translateY(-5px); /* Subtle hover effect */
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on hover */
+  }
+
+  .image-wrapper {
+    max-height: 350px; /* Allow image to be larger */
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    position: relative; /* for better layout control */
+  }
+
+  .image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 8px;
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .image-wrapper img:hover {
+    transform: scale(1.05); /* Slight zoom effect when hovered */
+  }
+
+  .mat-card-header {
+    text-align: center;
+    margin-bottom: 15px;
+  }
+
+  .mat-card-title {
+    font-size: 1.8rem; /* Larger title */
+    font-weight: bold;
+    color: #333;
+  }
+
+  .mat-card-subtitle {
+    font-size: 1.2rem;
+    color: #777;
+  }
+
+  .description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #444;
+    text-align: justify;
+    margin-bottom: 20px;
+  }
+
+  .spicy-level,
+  .allergens,
+  .ingredients {
+    font-size: 1rem;
+    margin-top: 12px;
+    color: #555;
+  }
+
+  .spicy-level strong,
+  .allergens strong,
+  .ingredients strong {
+    font-weight: bold;
+    color: #333;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  button {
+    background-color: #5f321a;
+    color: white;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 25px;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+      background-color: #d45127; /* Slightly darker shade on hover */
+    }
+  }
+}

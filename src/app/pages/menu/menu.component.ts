@@ -16,6 +16,7 @@ import { AddedToCartComponent } from '../../components/dialogs/added-to-cart/add
 export class MenuComponent {
   products: Product[] = [
     {
+      id: 1,
       name: 'Spicy Chicken Burger',
       description: 'A hot and crispy chicken burger.',
       price: 7.99,
@@ -23,31 +24,33 @@ export class MenuComponent {
       image: 'products/burger.jpg',
     },
     {
+      id: 2,
       name: 'Cheesy Pizza',
       description: 'Loaded with mozzarella and cheddar.',
       price: 9.99,
-      spicyLevel: 1,
       image: 'products/pizza.jpg',
     },
     {
+      id: 3,
       name: 'BBQ Ribs',
       description: 'Tender ribs with BBQ sauce.',
       price: 12.99,
-      spicyLevel: 2,
       image: 'products/bbqribs.jpg',
     },
     {
-      name: 'BBQ Ribs',
-      description: 'Tender ribs with BBQ sauce.',
+      id: 4,
+
+      name: 'BBQ Ribs2',
+      description:
+        'Tender ribs with BBQ sauce. saaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
       price: 12.99,
-      spicyLevel: 2,
       image: 'products/bbqribs.jpg',
     },
     {
-      name: 'BBQ Ribs',
+      id: 5,
+      name: 'BBQ Ribs3',
       description: 'Tender ribs with BBQ sauce.',
       price: 12.99,
-      spicyLevel: 2,
       image: 'products/bbqribs.jpg',
     },
   ];
