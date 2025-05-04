@@ -105,6 +105,22 @@
     color: #4e342e;
   }
 
+  .clear-btn {
+    padding: 0.6rem 1.5rem;
+    font-size: 1rem;
+    background: #a98c81;
+    color: white;
+    border: none;
+    margin-right: 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+
+    &:hover {
+      background: #a17769;
+    }
+  }
+
   .order-btn {
     padding: 0.6rem 1.5rem;
     font-size: 1rem;

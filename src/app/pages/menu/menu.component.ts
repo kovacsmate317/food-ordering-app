@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ProductCardComponent } from '../../components/product-card/product-card.component';
-import { Product } from '../../types/types';
+import { Product } from '../../shared/models/types';
+import { CartService } from '../../shared/services/cartservice.service';
+import { MatDialog } from '@angular/material/dialog';
+import { AddedToCartComponent } from '../../components/dialogs/added-to-cart/added-to-cart.component';
 
 @Component({
   selector: 'app-menu',
@@ -49,8 +52,10 @@ export class MenuComponent {
     },
   ];
 
-  handleAddToCart(product: any) {
-    console.log('Added to cart:', product);
-    // Add to cart logic or pass to a cart service here
+  constructor(private cartService: CartService, private dialog: MatDialog) {}
+
+  handleAddToCart(product: Product) {
+    this.cartService.addToCart(product);
+    this.dialog.open(AddedToCartComponent);
   }
 }

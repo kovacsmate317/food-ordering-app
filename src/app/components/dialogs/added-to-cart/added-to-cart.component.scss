@@ -1,0 +1,31 @@
+.dialog-content {
+  text-align: center;
+  padding: 24px;
+  max-width: 300px;
+
+  .icon {
+    font-size: 48px;
+    margin-bottom: 12px;
+  }
+
+  h2 {
+    margin: 0;
+    font-size: 24px;
+    color: #4caf50;
+  }
+
+  p {
+    margin: 8px 0 24px;
+    color: #555;
+  }
+
+  .dialog-actions {
+    display: flex;
+    justify-content: center;
+
+    button {
+      padding: 6px 24px;
+      font-weight: bold;
+    }
+  }
+}

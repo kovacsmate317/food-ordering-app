@@ -20,7 +20,10 @@
     <p>
       Total: <strong>{{ getTotal() | currency }}</strong>
     </p>
-    <button class="order-btn" (click)="placeOrder()">Place Order</button>
+    <div>
+      <button class="clear-btn" (click)="clearCart()">Clear cart</button>
+      <button class="order-btn" (click)="placeOrder()">Place Order</button>
+    </div>
   </div>
 </div>
 

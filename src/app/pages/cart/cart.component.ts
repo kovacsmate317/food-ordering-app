@@ -1,15 +1,11 @@
 import { CurrencyPipe, NgFor, NgIf } from '@angular/common';
-import { Component } from '@angular/core';
-import { Order } from '../../types/types';
+import { Component, OnInit } from '@angular/core';
+import {
+  CartService,
+  CartItem,
+} from '../../shared/services/cartservice.service';
+import { Order } from '../../shared/models/types';
 
-interface CartItem {
-  name: string;
-  description: string;
-  price: number;
-  spicyLevel: number;
-  image: string;
-  quantity: number;
-}
 @Component({
   selector: 'app-cart',
   standalone: true,
@@ -17,53 +13,20 @@ interface CartItem {
   templateUrl: './cart.component.html',
   styleUrl: './cart.component.scss',
 })
-export class CartComponent {
+export class CartComponent implements OnInit {
   cart: CartItem[] = [];
   email: string = 'user123@email.com';
   deliveryAddress: string = '123 Main St, City, Country';
   order: Order | null = null;
 
-  constructor() {
-    const initialItems = [
-      {
-        name: 'Spicy Chicken Burger',
-        description: 'A hot and crispy chicken burger.',
-        price: 7.99,
-        spicyLevel: 3,
-        image: 'products/burger.jpg',
-      },
-      {
-        name: 'Cheesy Pizza',
-        description: 'Loaded with mozzarella and cheddar.',
-        price: 9.99,
-        spicyLevel: 1,
-        image: 'products/pizza.jpg',
-      },
-      {
-        name: 'Cheesy Pizza',
-        description: 'Loaded with mozzarella and cheddar.',
-        price: 9.99,
-        spicyLevel: 1,
-        image: 'products/pizza.jpg',
-      },
-    ];
+  constructor(private cartService: CartService) {}
 
-    this.cart = this.groupItems(initialItems);
+  ngOnInit(): void {
+    this.loadCart();
   }
 
-  groupItems(items: Omit<CartItem, 'quantity'>[]): CartItem[] {
-    const grouped: Record<string, CartItem> = {};
-
-    items.forEach((item) => {
-      const key = item.name;
-      if (!grouped[key]) {
-        grouped[key] = { ...item, quantity: 1 };
-      } else {
-        grouped[key].quantity++;
-      }
-    });
-
-    return Object.values(grouped);
+  loadCart() {
+    this.cart = this.cartService.getCartItems();
   }
 
   getTotal(): string {
@@ -75,19 +38,23 @@ export class CartComponent {
   }
 
   increaseQuantity(item: CartItem) {
-    item.quantity++;
+    this.cartService.updateQuantity(item.name, item.quantity + 1);
+    this.loadCart();
   }
 
   decreaseQuantity(item: CartItem) {
-    if (item.quantity > 1) {
-      item.quantity--;
-    } else {
-      this.removeItem(item);
-    }
+    this.cartService.updateQuantity(item.name, item.quantity - 1);
+    this.loadCart();
   }
 
   removeItem(item: CartItem) {
-    this.cart = this.cart.filter((i) => i.name !== item.name);
+    this.cartService.removeItem(item.name);
+    this.loadCart();
+  }
+
+  clearCart() {
+    this.cartService.clearCart();
+    this.loadCart();
   }
 
   placeOrder() {
@@ -104,5 +71,7 @@ export class CartComponent {
     };
     this.order = newOrder;
     console.log('Order placed:', this.order);
+    this.cartService.clearCart();
+    this.loadCart();
   }
 }
