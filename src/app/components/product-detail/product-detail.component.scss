@@ -1,27 +1,27 @@
 .product-detail-card {
   width: 100%;
-  max-width: 800px; /* Increased width for a larger card */
-  margin: 40px auto; /* Added more spacing from top and bottom */
+  max-width: 800px;
+  margin: 40px auto;
   padding: 20px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   border-radius: 12px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Soft shadow for modern feel */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   background-color: #fff;
   transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 
   &:hover {
-    transform: translateY(-5px); /* Subtle hover effect */
-    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2); /* Slightly stronger shadow on hover */
+    transform: translateY(-5px);
+    box-shadow: 0 8px 12px rgba(0, 0, 0, 0.2);
   }
 
   .image-wrapper {
-    max-height: 350px; /* Allow image to be larger */
+    max-height: 350px;
     overflow: hidden;
     border-radius: 8px;
     margin-bottom: 20px;
-    position: relative; /* for better layout control */
+    position: relative;
   }
 
   .image-wrapper img {
@@ -33,7 +33,7 @@
   }
 
   .image-wrapper img:hover {
-    transform: scale(1.05); /* Slight zoom effect when hovered */
+    transform: scale(1.05);
   }
 
   .mat-card-header {
@@ -42,7 +42,7 @@
   }
 
   .mat-card-title {
-    font-size: 1.8rem; /* Larger title */
+    font-size: 1.8rem;
     font-weight: bold;
     color: #333;
   }
@@ -91,7 +91,7 @@
     transition: background-color 0.3s ease;
 
     &:hover {
-      background-color: #d45127; /* Slightly darker shade on hover */
+      background-color: #d45127;
     }
   }
 }

@@ -8,19 +8,49 @@
   </div>
 
   <div class="right-side">
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)" class="login-form">
+    <form (ngSubmit)="onLogin()" class="login-form" novalidate>
       <h2>Login</h2>
 
-      <label>Email</label>
-      <input type="email" name="email" [(ngModel)]="email" required />
+      <label for="email">Email</label>
+      <input
+        id="email"
+        type="email"
+        [formControl]="email"
+        name="email"
+        required
+        placeholder="Enter your email"
+      />
+      <div
+        class="error"
+        *ngIf="email.invalid && (email.dirty || email.touched)"
+      >
+        <span *ngIf="email.errors?.['required']">Email is required.</span>
+        <span *ngIf="email.errors?.['email']">Invalid email format.</span>
+      </div>
 
-      <label>Password</label>
-      <input type="password" name="password" [(ngModel)]="password" required />
+      <label for="password">Password</label>
+      <input
+        id="password"
+        type="password"
+        [formControl]="password"
+        name="password"
+        required
+        placeholder="Enter your password"
+      />
+      <div
+        class="error"
+        *ngIf="password.invalid && (password.dirty || password.touched)"
+      >
+        <span *ngIf="password.errors?.['required']">Password is required.</span>
+        <span *ngIf="password.errors?.['minlength']">
+          Password must be at least 6 characters.
+        </span>
+      </div>
 
-      <button type="submit">Login</button>
+      <button type="submit" [disabled]="isLoading">Login</button>
 
-      <div class="hint" *ngIf="form.invalid && submitted">
-        {{ getErrorMessage(form) }}
+      <div class="hint" *ngIf="errorMessage">
+        {{ errorMessage }}
       </div>
 
       <p id="login">
