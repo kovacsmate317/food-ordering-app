@@ -1,0 +1,23 @@
+<div class="profile-container">
+  <h2>User Profile</h2>
+
+  <div class="info">
+    <p><strong>Email:</strong> {{ email }}</p>
+
+    <div class="addresses">
+      <h3>Saved Addresses</h3>
+      <div class="address" *ngFor="let addr of addresses">
+        <p><strong>Town:</strong> {{ addr.town }}</p>
+        <p><strong>Street:</strong> {{ addr.street }}</p>
+        <p><strong>Number:</strong> {{ addr.number }}</p>
+        <p *ngIf="addr.level"><strong>Level:</strong> {{ addr.level }}</p>
+        <p *ngIf="addr.door"><strong>Door:</strong> {{ addr.door }}</p>
+        <p *ngIf="addr.ring"><strong>Ring:</strong> {{ addr.ring }}</p>
+        <p *ngIf="addr.countyCode">
+          <strong>County Code:</strong> {{ addr.countyCode }}
+        </p>
+        <hr />
+      </div>
+    </div>
+  </div>
+</div>

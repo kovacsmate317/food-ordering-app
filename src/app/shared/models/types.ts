@@ -31,3 +31,13 @@ export interface Order {
   deliveryAddress: string;
   paymentStatus: 'pending' | 'paid' | 'failed';
 }
+
+export interface Address {
+  town: string;
+  street: string;
+  number: string;
+  level?: string;
+  door?: string;
+  ring?: string;
+  countyCode?: string;
+}
