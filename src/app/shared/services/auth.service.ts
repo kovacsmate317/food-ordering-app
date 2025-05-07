@@ -1,7 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Auth, authState, User, UserCredential } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { signInWithEmailAndPassword, signOut } from '@firebase/auth';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signOut,
+} from '@firebase/auth';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -32,5 +36,9 @@ export class AuthService {
 
   updateLoginStatus(isLoggedIn: boolean): void {
     localStorage.setItem('isLoggedIn', isLoggedIn ? 'true' : 'false');
+  }
+
+  register(email: string, password: string): Promise<UserCredential> {
+    return createUserWithEmailAndPassword(this.auth, email, password);
   }
 }

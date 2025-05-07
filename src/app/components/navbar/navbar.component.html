@@ -22,12 +22,17 @@
         (click)="sidenav.close()"
         >Cart</a
       >
+
       <a
+        *ngIf="!isLoggedIn"
         mat-list-item
         routerLink="/login"
         routerLinkActive="active"
         (click)="sidenav.close()"
         >Login</a
+      >
+      <a *ngIf="isLoggedIn" mat-list-item (click)="logout(); sidenav.close()"
+        >Logout</a
       >
     </mat-nav-list>
   </mat-sidenav>
@@ -47,7 +52,15 @@
         <a mat-button routerLink="/home" routerLinkActive="active">Home</a>
         <a mat-button routerLink="/menu" routerLinkActive="active">Menu</a>
         <a mat-button routerLink="/cart" routerLinkActive="active">Cart</a>
-        <a mat-button routerLink="/login" routerLinkActive="active">Login</a>
+
+        <a
+          *ngIf="!isLoggedIn"
+          mat-button
+          routerLink="/login"
+          routerLinkActive="active"
+          >Login</a
+        >
+        <a *ngIf="isLoggedIn" mat-button (click)="logout()">Logout</a>
       </nav>
     </mat-toolbar>
 

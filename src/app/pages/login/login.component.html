@@ -58,5 +58,12 @@
         <span routerLink="/register" class="link">Register</span>
       </p>
     </form>
+
+    <app-loading
+      *ngIf="isLoading"
+      [isLoading]="true"
+      [size]="50"
+      [overlay]="true"
+    ></app-loading>
   </div>
 </div>

@@ -8,11 +8,18 @@ import {
 } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
+import { LoadingComponent } from '../../components/loading/loading.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterModule, ReactiveFormsModule],
+  imports: [
+    CommonModule,
+    FormsModule,
+    RouterModule,
+    ReactiveFormsModule,
+    LoadingComponent,
+  ],
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
@@ -39,7 +46,6 @@ export class LoginComponent {
     const passwordValue = this.password.value || '';
 
     this.isLoading = true;
-    //this.showLoginForm = false;
     this.errorMessage = '';
 
     this.authService
@@ -52,7 +58,6 @@ export class LoginComponent {
       .catch((error) => {
         console.error('Login error:', error);
         this.isLoading = false;
-        //this.showLoginForm = true;
 
         switch (error.code) {
           case 'auth/user-not-found':
