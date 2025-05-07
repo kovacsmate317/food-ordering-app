@@ -5,6 +5,7 @@ import {
   CartItem,
 } from '../../shared/services/cartservice.service';
 import { Order } from '../../shared/models/types';
+import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
   selector: 'app-cart',
@@ -18,11 +19,19 @@ export class CartComponent implements OnInit {
   email: string = 'user123@email.com';
   deliveryAddress: string = '123 Main St, City, Country';
   order: Order | null = null;
+  isLoggedIn: boolean = false;
 
-  constructor(private cartService: CartService) {}
+  constructor(
+    private cartService: CartService,
+    private authService: AuthService
+  ) {}
 
   ngOnInit(): void {
     this.loadCart();
+
+    this.authService.isLoggedIn().subscribe((user) => {
+      this.isLoggedIn = !!user;
+    });
   }
 
   loadCart() {

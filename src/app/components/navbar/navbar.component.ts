@@ -32,7 +32,6 @@ export class NavbarComponent {
   isMobile = signal(false);
 
   ngOnInit() {
-    // if the Sub is not a varibale angular will unsub no need for ngdestroy (?)
     this.authService.isLoggedIn().subscribe((user) => {
       this.isLoggedIn = !!user;
     });

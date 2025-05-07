@@ -22,7 +22,10 @@
     </p>
     <div>
       <button class="clear-btn" (click)="clearCart()">Clear cart</button>
-      <button class="order-btn" (click)="placeOrder()">Place Order</button>
+      <button *ngIf="isLoggedIn" class="order-btn" (click)="placeOrder()">
+        Place Order
+      </button>
+      <p *ngIf="!isLoggedIn">You need to log in to order</p>
     </div>
   </div>
 </div>

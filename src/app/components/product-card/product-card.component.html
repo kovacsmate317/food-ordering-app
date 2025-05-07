@@ -1,14 +1,14 @@
-<mat-card class="product-card" [routerLink]="['/product', product.id]">
-  <div class="image-wrapper">
+<mat-card class="product-card">
+  <div class="image-wrapper clickable" [routerLink]="['/product', product.id]">
     <img mat-card-image [src]="product.image" alt="{{ product.name }}" />
   </div>
 
-  <mat-card-header>
+  <mat-card-header [routerLink]="['/product', product.id]" class="clickable">
     <mat-card-title>{{ product.name }}</mat-card-title>
     <mat-card-subtitle>{{ product.price | currency }}</mat-card-subtitle>
   </mat-card-header>
 
-  <mat-card-content>
+  <mat-card-content [routerLink]="['/product', product.id]" class="clickable">
     <p class="description single-line">{{ product.description }}</p>
     <p class="spicy-level">
       @if(product.spicyLevel){ 🌶️ Spiciness:
