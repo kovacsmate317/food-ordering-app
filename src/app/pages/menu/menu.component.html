@@ -1,10 +1,32 @@
 <div class="menu-wrapper">
-  <div class="products">
-    <app-product-card
-      *ngFor="let product of products"
-      [product]="product"
-      (addToCart)="handleAddToCart($event)"
-    >
-    </app-product-card>
+  <div *ngIf="showAddForm && isManagerOrAdmin" class="add-product-form">
+    <h3 style="margin-top: 50px">Add New Product</h3>
+    <input [(ngModel)]="newProduct.name" placeholder="Name" />
+    <input [(ngModel)]="newProduct.description" placeholder="Description" />
+    <input [(ngModel)]="newProduct.price" type="number" placeholder="Price" />
+    <input [(ngModel)]="newProduct.image" placeholder="Image path" />
+    <button (click)="addProduct()">Add Product</button>
+    <button (click)="toggleAddForm()">Cancel</button>
+  </div>
+
+  <div class="products" *ngIf="!showAddForm">
+    <div *ngFor="let product of products">
+      <app-product-card
+        [product]="product"
+        (addToCart)="handleAddToCart(product)"
+      ></app-product-card>
+
+      <button
+        *ngIf="isManagerOrAdmin"
+        class="delete-btn"
+        (click)="deleteProduct(product.id)"
+      >
+        Delete
+      </button>
+    </div>
+
+    <div *ngIf="isManagerOrAdmin" class="add-card" (click)="toggleAddForm()">
+      <span>＋</span>
+    </div>
   </div>
 </div>

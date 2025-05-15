@@ -1,14 +1,17 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { ProductService } from '../../shared/services/product.service';
+import { Product } from '../../shared/models/types';
+import { CartService } from '../../shared/services/cartservice.service';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { SpicyPipe } from '../../shared/pipes/spicy.pipe';
-import { Product } from '../../shared/models/types';
 import { RouterModule } from '@angular/router';
+import { AddedToCartComponent } from '../dialogs/added-to-cart/added-to-cart.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-product-card',
-  standalone: true,
   imports: [
     CommonModule,
     MatCardModule,
@@ -19,11 +22,29 @@ import { RouterModule } from '@angular/router';
   templateUrl: './product-card.component.html',
   styleUrls: ['./product-card.component.scss'],
 })
-export class ProductCardComponent {
+export class ProductCardComponent implements OnInit {
   @Input() product!: Product;
-  @Output() addToCart = new EventEmitter<any>();
+  fullProduct?: Product;
+
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService,
+    private dialog: MatDialog
+  ) {}
+
+  async ngOnInit() {
+    if (this.product?.id) {
+      const fetched = await this.productService.getProductById(this.product.id);
+      if (fetched) {
+        this.fullProduct = fetched;
+      }
+    }
+  }
 
   addProduct() {
-    this.addToCart.emit(this.product);
+    if (this.fullProduct) {
+      this.cartService.addToCart(this.fullProduct);
+      this.dialog.open(AddedToCartComponent);
+    }
   }
 }

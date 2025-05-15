@@ -37,3 +37,56 @@
     max-width: 1400px;
   }
 }
+
+.add-product-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-width: 300px;
+  margin-bottom: 2rem;
+
+  input {
+    padding: 0.5rem;
+  }
+
+  button {
+    padding: 0.5rem;
+    background: green;
+    color: white;
+    border: none;
+    cursor: pointer;
+  }
+}
+
+.delete-btn {
+  margin: 0.5rem 0;
+  background: crimson;
+  color: white;
+  padding: 0.4rem 1rem;
+  border: none;
+  cursor: pointer;
+}
+
+.add-card {
+  width: 200px;
+  height: 300px;
+  border: 2px dashed #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 3rem;
+  cursor: pointer;
+  margin: 1rem;
+  border-radius: 12px;
+  transition: background 0.3s;
+}
+
+.add-card:hover {
+  background: #f9f9f9;
+}
+.error {
+  color: red;
+  font-size: 0.85rem;
+  margin-top: -4px;
+  margin-bottom: 8px;
+}

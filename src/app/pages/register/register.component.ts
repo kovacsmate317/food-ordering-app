@@ -9,6 +9,7 @@ import {
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '../../shared/services/auth.service';
 import { LoadingComponent } from '../../components/loading/loading.component';
+import { User, Address } from '../../shared/models/types';
 
 @Component({
   selector: 'app-login',
@@ -33,13 +34,20 @@ export class RegisterComponent {
     Validators.required,
     Validators.minLength(6),
   ]);
+  town = new FormControl('', [Validators.required]);
+  street = new FormControl('', [Validators.required]);
+  number = new FormControl('', [Validators.required]);
+  level = new FormControl('');
+  door = new FormControl('');
+  ring = new FormControl('');
+  countyCode = new FormControl('');
   errorMessage: string = '';
   isLoading: boolean = false;
   successMessage: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
-  onRegister() {
+  async onRegister() {
     if (this.email.invalid) {
       this.errorMessage = 'Invalid email';
     }
@@ -56,8 +64,22 @@ export class RegisterComponent {
     this.isLoading = true;
     this.errorMessage = '';
 
-    this.authService
-      .register(emailValue, passwordValue)
+    const userData: Partial<User> = {
+      email: emailValue || '',
+      address: {
+        town: this.town.value || '',
+        street: this.street.value || '',
+        number: this.number.value || '',
+        level: this.level.value || '',
+        door: this.door.value || '',
+        ring: this.ring.value || '',
+        countyCode: this.countyCode.value || '',
+      },
+      orders: [],
+    };
+
+    await this.authService
+      .register(emailValue, passwordValue, userData)
       .then((userCredential) => {
         console.log('Register successful:', userCredential.user);
         this.successMessage = 'Register successful!';

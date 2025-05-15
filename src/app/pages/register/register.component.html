@@ -51,7 +51,34 @@
       >
         Passwords do not match.
       </div>
+      <label>Town</label>
+      <input type="text" [formControl]="town" placeholder="Town" />
+      <div class="error" *ngIf="town.invalid && town.touched">Required</div>
 
+      <!-- Street -->
+      <label>Street</label>
+      <input type="text" [formControl]="street" placeholder="Street" />
+      <div class="error" *ngIf="street.invalid && street.touched">Required</div>
+
+      <!-- Number -->
+      <label>Number</label>
+      <input type="text" [formControl]="number" placeholder="House Number" />
+      <div class="error" *ngIf="number.invalid && number.touched">Required</div>
+
+      <!-- Optional fields -->
+      <label>Level (optional)</label>
+      <input type="text" [formControl]="level" placeholder="Level" />
+
+      <label>Door (optional)</label>
+      <input type="text" [formControl]="door" placeholder="Door" />
+
+      <label>Ring (optional)</label>
+      <input type="text" [formControl]="ring" placeholder="Ring" />
+
+      <label>County Code (optional)</label>
+      <input type="text" [formControl]="countyCode" placeholder="County Code" />
+
+      <!-- Submit -->
       <button
         type="submit"
         [disabled]="
@@ -59,7 +86,10 @@
           email.invalid ||
           password.invalid ||
           confirmPassword.invalid ||
-          password.value !== confirmPassword.value
+          password.value !== confirmPassword.value ||
+          town.invalid ||
+          street.invalid ||
+          number.invalid
         "
       >
         {{ isLoading ? "Registering..." : "Register" }}

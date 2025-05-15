@@ -1,5 +1,5 @@
 export interface Product {
-  id: number;
+  id: string;
   name: string;
   description: string;
   price: number;
@@ -7,7 +7,6 @@ export interface Product {
   image: string;
   allergens?: string[];
   ingredients?: string[];
-  category?: string;
 }
 
 export interface CartItem extends Product {
@@ -15,10 +14,11 @@ export interface CartItem extends Product {
 }
 
 export interface User {
+  id: string;
   email: string;
-  password: string;
   role: 'admin' | 'manager' | 'customer';
-  address: string;
+  address: Address;
+  orders: Order[];
 }
 
 export interface Order {
@@ -28,8 +28,7 @@ export interface Order {
   totalAmount: number;
   status: 'pending' | 'preparing' | 'completed' | 'canceled';
   orderDate: string;
-  deliveryAddress: string;
-  paymentStatus: 'pending' | 'paid' | 'failed';
+  deliveryAddress: Address;
 }
 
 export interface Address {

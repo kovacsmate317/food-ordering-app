@@ -1,19 +1,30 @@
-<mat-card class="product-card">
-  <div class="image-wrapper clickable" [routerLink]="['/product', product.id]">
-    <img mat-card-image [src]="product.image" alt="{{ product.name }}" />
+<mat-card class="product-card" *ngIf="fullProduct">
+  <div
+    class="image-wrapper clickable"
+    [routerLink]="['/product', fullProduct.id]"
+  >
+    <img
+      mat-card-image
+      [src]="fullProduct.image"
+      alt="{{ fullProduct.name }}"
+    />
   </div>
 
-  <mat-card-header [routerLink]="['/product', product.id]" class="clickable">
-    <mat-card-title>{{ product.name }}</mat-card-title>
-    <mat-card-subtitle>{{ product.price | currency }}</mat-card-subtitle>
+  <mat-card-header
+    [routerLink]="['/product', fullProduct.id]"
+    class="clickable"
+  >
+    <mat-card-title>{{ fullProduct.name }}</mat-card-title>
+    <mat-card-subtitle>{{ fullProduct.price | currency }}</mat-card-subtitle>
   </mat-card-header>
 
-  <mat-card-content [routerLink]="['/product', product.id]" class="clickable">
-    <p class="description single-line">{{ product.description }}</p>
-    <p class="spicy-level">
-      @if(product.spicyLevel){ 🌶️ Spiciness:
-      <strong>{{ product.spicyLevel | spicy }}</strong>
-      }
+  <mat-card-content
+    [routerLink]="['/product', fullProduct.id]"
+    class="clickable"
+  >
+    <p class="description single-line">{{ fullProduct.description }}</p>
+    <p class="spicy-level" *ngIf="fullProduct.spicyLevel">
+      🌶️ Spiciness: <strong>{{ fullProduct.spicyLevel | spicy }}</strong>
     </p>
   </mat-card-content>
 
