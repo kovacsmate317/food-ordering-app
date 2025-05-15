@@ -1,15 +1,63 @@
 <div class="menu-wrapper">
+  <div *ngIf="isManagerOrAdmin" class="filters">
+    <label>
+      🔍 Search Name Prefix:
+      <input
+        [(ngModel)]="namePrefix"
+        (ngModelChange)="searchByPrefix()"
+        placeholder="e.g. Burger"
+      />
+    </label>
+
+    <label>
+      🌶️ Spicy Level ≥:
+      <input
+        type="number"
+        min="0"
+        max="5"
+        [(ngModel)]="minSpicyLevel"
+        (ngModelChange)="filterSpicy()"
+      />
+    </label>
+
+    <button (click)="showTopExpensive()">💰 Top 5 Expensive</button>
+    <button (click)="loadProducts()">🔄 Reset Filters</button>
+  </div>
+
   <div *ngIf="showAddForm && isManagerOrAdmin" class="add-product-form">
     <h3 style="margin-top: 50px">Add New Product</h3>
     <input [(ngModel)]="newProduct.name" placeholder="Name" />
     <input [(ngModel)]="newProduct.description" placeholder="Description" />
     <input [(ngModel)]="newProduct.price" type="number" placeholder="Price" />
-    <input [(ngModel)]="newProduct.image" placeholder="Image path" />
+
+    <label>
+      Spicy Level (0-5)
+      <input
+        [(ngModel)]="newProduct.spicyLevel"
+        type="number"
+        min="0"
+        max="5"
+      />
+    </label>
+
+    <input
+      [(ngModel)]="allergensString"
+      (ngModelChange)="updateAllergens()"
+      placeholder="Allergens (comma separated)"
+    />
+
+    <input
+      [(ngModel)]="ingredientsString"
+      (ngModelChange)="updateIngredients()"
+      placeholder="Ingredients (comma separated)"
+    />
+
     <button (click)="addProduct()">Add Product</button>
     <button (click)="toggleAddForm()">Cancel</button>
   </div>
 
-  <div class="products" *ngIf="!showAddForm">
+  <!-- Product list -->
+  <div class="products">
     <div *ngFor="let product of products">
       <app-product-card
         [product]="product"

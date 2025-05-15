@@ -6,6 +6,9 @@ import {
 } from '../../shared/services/cartservice.service';
 import { Address, Order } from '../../shared/models/types';
 import { AuthService } from '../../shared/services/auth.service';
+import { OrderService } from '../../shared/services/order.service';
+import { UserService } from '../../shared/services/user.service'; // <-- import UserService
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-cart',
@@ -16,7 +19,7 @@ import { AuthService } from '../../shared/services/auth.service';
 })
 export class CartComponent implements OnInit {
   cart: CartItem[] = [];
-  email: string = 'user123@email.com';
+  email: string = '';
   deliveryAddress: Address = {
     town: '',
     street: '',
@@ -24,10 +27,14 @@ export class CartComponent implements OnInit {
   };
   order: Order | null = null;
   isLoggedIn: boolean = false;
+  isLoading = false;
+  errorMsg = '';
 
   constructor(
     private cartService: CartService,
-    private authService: AuthService
+    private authService: AuthService,
+    private orderService: OrderService,
+    private userService: UserService
   ) {}
 
   ngOnInit(): void {
@@ -35,6 +42,15 @@ export class CartComponent implements OnInit {
 
     this.authService.isLoggedIn().subscribe((user) => {
       this.isLoggedIn = !!user;
+      if (user) {
+        this.email = user.email || '';
+
+        this.userService.getUserProfile().subscribe((profile) => {
+          if (profile.user?.address) {
+            this.deliveryAddress = { ...profile.user.address };
+          }
+        });
+      }
     });
   }
 
@@ -70,20 +86,50 @@ export class CartComponent implements OnInit {
     this.loadCart();
   }
 
-  placeOrder() {
-    const totalAmount = parseFloat(this.getTotal());
-    const newOrder: Order = {
-      id: `order-${new Date().getTime()}`,
-      email: this.email,
-      items: this.cart,
-      totalAmount,
-      status: 'pending',
-      orderDate: new Date().toISOString(),
-      deliveryAddress: this.deliveryAddress,
-    };
-    this.order = newOrder;
-    console.log('Order placed:', this.order);
-    this.cartService.clearCart();
-    this.loadCart();
+  async placeOrder() {
+    this.isLoading = true;
+    this.errorMsg = '';
+    console.log('placeOrder clicked');
+
+    if (!this.email) {
+      this.errorMsg = 'User email missing; cannot place order';
+      this.isLoading = false;
+      return;
+    }
+
+    try {
+      const user = await firstValueFrom(this.authService.currentUser);
+      if (!user) {
+        this.errorMsg = 'User not logged in';
+        this.isLoading = false;
+        return;
+      }
+
+      const userId = user.uid;
+      const totalAmount = parseFloat(this.getTotal());
+      const newOrder: Omit<Order, 'id'> = {
+        email: this.email,
+        items: this.cart,
+        totalAmount,
+        status: 'pending',
+        orderDate: new Date().toISOString(),
+        deliveryAddress: this.deliveryAddress,
+      };
+
+      const createdOrder = await this.orderService.createOrder(
+        newOrder,
+        userId
+      );
+      this.order = createdOrder;
+      console.log('Order placed:', this.order);
+
+      this.cartService.clearCart();
+      this.loadCart();
+    } catch (error) {
+      console.error('Failed to place order:', error);
+      this.errorMsg = 'Failed to place order: ' + (error as Error).message;
+    } finally {
+      this.isLoading = false;
+    }
   }
 }

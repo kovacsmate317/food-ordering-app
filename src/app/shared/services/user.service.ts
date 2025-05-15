@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { User, Order } from '../models/types';
+import { User, Order, Address } from '../models/types';
 import {
   Firestore,
   doc,
@@ -8,6 +8,8 @@ import {
   getDocs,
   query,
   where,
+  updateDoc,
+  documentId,
 } from '@angular/fire/firestore';
 import { AuthService } from './auth.service';
 import { Observable, of, from } from 'rxjs';
@@ -18,6 +20,22 @@ import { switchMap } from 'rxjs/operators';
 })
 export class UserService {
   constructor(private firestore: Firestore, private authService: AuthService) {}
+
+  async updateUser(
+    uid: string,
+    data: { address: Address; orders: Order[] }
+  ): Promise<void> {
+    try {
+      const userDocRef = doc(this.firestore, 'Users', uid);
+      await updateDoc(userDocRef, {
+        address: data.address,
+        orders: data.orders,
+      });
+    } catch (error) {
+      console.error('Error updating user:', error);
+      throw error;
+    }
+  }
 
   getUserProfile(): Observable<{
     user: User | null;
@@ -78,7 +96,8 @@ export class UserService {
       }
 
       const ordersCollection = collection(this.firestore, 'Orders');
-      const q = query(ordersCollection, where('id', 'in', user.orders));
+
+      const q = query(ordersCollection, where(documentId(), 'in', user.orders));
       const ordersSnapshot = await getDocs(q);
 
       const orders: Order[] = [];
@@ -104,7 +123,7 @@ export class UserService {
         },
       };
     } catch (error) {
-      console.error('Hiba a felhasználói adatok betöltése során:', error);
+      console.error('Error loading user with orders:', error);
       return {
         user: null,
         orders: [],
@@ -123,7 +142,7 @@ export class UserService {
       const userData = userSnapshot.data() as User;
       return { ...userData, id: userId };
     } catch (error) {
-      console.error('Hiba a getUserById metódusban:', error);
+      console.error('Error in getUserById:', error);
       return null;
     }
   }

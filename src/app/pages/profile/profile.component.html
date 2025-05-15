@@ -1,23 +1,46 @@
-<div class="profile-container">
+<div class="profile-container" *ngIf="!isLoading; else loading">
   <h2>User Profile</h2>
 
-  <div class="info">
+  <p *ngIf="error" class="error">{{ error }}</p>
+
+  <div *ngIf="!error">
     <p><strong>Email:</strong> {{ email }}</p>
 
-    <div class="addresses">
-      <h3>Saved Addresses</h3>
-      <div class="address" *ngFor="let addr of addresses">
-        <p><strong>Town:</strong> {{ addr.town }}</p>
-        <p><strong>Street:</strong> {{ addr.street }}</p>
-        <p><strong>Number:</strong> {{ addr.number }}</p>
-        <p *ngIf="addr.level"><strong>Level:</strong> {{ addr.level }}</p>
-        <p *ngIf="addr.door"><strong>Door:</strong> {{ addr.door }}</p>
-        <p *ngIf="addr.ring"><strong>Ring:</strong> {{ addr.ring }}</p>
-        <p *ngIf="addr.countyCode">
-          <strong>County Code:</strong> {{ addr.countyCode }}
-        </p>
-        <hr />
+    <div class="address" *ngIf="address?.town">
+      <h3>Saved Address</h3>
+      <p><strong>Town:</strong> {{ address.town }}</p>
+      <p><strong>Street:</strong> {{ address.street }}</p>
+      <p><strong>Number:</strong> {{ address.number }}</p>
+      <p *ngIf="address.level"><strong>Level:</strong> {{ address.level }}</p>
+      <p *ngIf="address.door"><strong>Door:</strong> {{ address.door }}</p>
+      <p *ngIf="address.ring"><strong>Ring:</strong> {{ address.ring }}</p>
+      <p *ngIf="address.countyCode">
+        <strong>County Code:</strong> {{ address.countyCode }}
+      </p>
+
+      <hr />
+    </div>
+
+    <div class="orders" *ngIf="orders.length > 0; else noOrders">
+      <h3>Orders</h3>
+      <div class="order" *ngFor="let order of orders">
+        <p><strong>Order ID:</strong> {{ order.id }}</p>
+        <p><strong>Date:</strong> {{ order.orderDate | date : "medium" }}</p>
+        <p><strong>Status:</strong> {{ order.status }}</p>
+        <p><strong>Total Amount:</strong> {{ order.totalAmount | currency }}</p>
+        <hr style="margin-bottom: 10px" />
       </div>
     </div>
+    <ng-template #noOrders>
+      <p>No orders found.</p>
+    </ng-template>
+
+    <ng-template #noOrders>
+      <p>No orders found.</p>
+    </ng-template>
   </div>
 </div>
+
+<ng-template #loading>
+  <p>Loading profile...</p>
+</ng-template>

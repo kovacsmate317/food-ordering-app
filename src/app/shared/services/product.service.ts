@@ -9,6 +9,11 @@ import {
   getDocs,
   query,
   getDoc,
+  where,
+  orderBy,
+  endAt,
+  startAt,
+  limit,
 } from '@angular/fire/firestore';
 import {
   Observable,
@@ -63,6 +68,20 @@ export class ProductService {
       console.error('Error adding product:', error);
       throw error;
     }
+  }
+
+  getTopExpensiveProducts(): Observable<Product[]> {
+    const productsCollection = collection(
+      this.firestore,
+      this.PRODUCTS_COLLECTION
+    );
+    const q = query(productsCollection, orderBy('price', 'desc'), limit(5));
+    return from(getDocs(q)).pipe(
+      map((snapshot) =>
+        snapshot.docs.map((doc) => ({ ...(doc.data() as Product), id: doc.id }))
+      ),
+      catchError(() => of([]))
+    );
   }
 
   getAllproducts(): Observable<Product[]> {
@@ -135,5 +154,45 @@ export class ProductService {
       console.error('Error deleting product:', error);
       throw error;
     }
+  }
+
+  getSpicyProducts(minSpicy: number = 3): Observable<Product[]> {
+    const productsCollection = collection(
+      this.firestore,
+      this.PRODUCTS_COLLECTION
+    );
+    const q = query(productsCollection, where('spicyLevel', '>=', minSpicy));
+
+    return from(getDocs(q)).pipe(
+      map((snapshot) =>
+        snapshot.docs.map((doc) => ({ ...(doc.data() as Product), id: doc.id }))
+      ),
+      catchError((error) => {
+        console.error('Error fetching spicy products:', error);
+        return of([]);
+      })
+    );
+  }
+  searchProductsByName(prefix: string): Observable<Product[]> {
+    const productsCollection = collection(
+      this.firestore,
+      this.PRODUCTS_COLLECTION
+    );
+    const q = query(
+      productsCollection,
+      orderBy('name'),
+      startAt(prefix),
+      endAt(prefix + '\uf8ff')
+    );
+
+    return from(getDocs(q)).pipe(
+      map((snapshot) =>
+        snapshot.docs.map((doc) => ({ ...(doc.data() as Product), id: doc.id }))
+      ),
+      catchError((error) => {
+        console.error('Error searching products:', error);
+        return of([]);
+      })
+    );
   }
 }

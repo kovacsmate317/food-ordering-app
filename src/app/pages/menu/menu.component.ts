@@ -22,12 +22,17 @@ import { firstValueFrom } from 'rxjs';
 export class MenuComponent implements OnInit {
   products: Product[] = [];
   showAddForm = false;
+  namePrefix: string = '';
+  minSpicyLevel: number = 0;
 
   newProduct: Partial<Product> = {
     name: '',
     description: '',
     price: 0,
-    image: '',
+    image: 'products/placeholder.png',
+    spicyLevel: 0,
+    allergens: [],
+    ingredients: [],
   };
 
   isManagerOrAdmin = false;
@@ -45,7 +50,22 @@ export class MenuComponent implements OnInit {
     this.checkUserRole();
   }
 
-  private loadProducts() {
+  allergensString: string = '';
+  ingredientsString: string = '';
+
+  updateAllergens() {
+    this.newProduct.allergens = this.allergensString
+      ? this.allergensString.split(',').map((a) => a.trim())
+      : [];
+  }
+
+  updateIngredients() {
+    this.newProduct.ingredients = this.ingredientsString
+      ? this.ingredientsString.split(',').map((i) => i.trim())
+      : [];
+  }
+
+  loadProducts() {
     this.productService
       .getAllproducts()
       .pipe(take(1))
@@ -82,8 +102,7 @@ export class MenuComponent implements OnInit {
     if (
       !this.newProduct.name ||
       !this.newProduct.description ||
-      !this.newProduct.price ||
-      !this.newProduct.image
+      !this.newProduct.price
     ) {
       return;
     }
@@ -92,12 +111,45 @@ export class MenuComponent implements OnInit {
       this.newProduct as Product
     );
     this.products.push(created);
-    this.newProduct = { name: '', description: '', price: 0, image: '' };
+    this.newProduct = {
+      name: '',
+      description: '',
+      price: 0,
+    };
     this.showAddForm = false;
   }
 
   async deleteProduct(id: string) {
     await this.productService.deleteProduct(id);
     this.products = this.products.filter((p) => p.id !== id);
+  }
+
+  searchByPrefix() {
+    if (!this.namePrefix.trim()) return this.loadProducts();
+
+    this.productService
+      .searchProductsByName(this.namePrefix)
+      .pipe(take(1))
+      .subscribe((res) => {
+        this.products = res;
+      });
+  }
+
+  filterSpicy() {
+    this.productService
+      .getSpicyProducts(this.minSpicyLevel)
+      .pipe(take(1))
+      .subscribe((res) => {
+        this.products = res;
+      });
+  }
+
+  showTopExpensive() {
+    this.productService
+      .getTopExpensiveProducts()
+      .pipe(take(1))
+      .subscribe((res) => {
+        this.products = res;
+      });
   }
 }

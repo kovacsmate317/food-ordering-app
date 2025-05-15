@@ -35,6 +35,7 @@ export const routes: Routes = [
   {
     path: 'product/:id',
     component: ProductDetailComponent,
+    canActivate: [authGuard],
   },
 
   {
