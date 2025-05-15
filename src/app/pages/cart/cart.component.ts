@@ -4,7 +4,7 @@ import {
   CartService,
   CartItem,
 } from '../../shared/services/cartservice.service';
-import { Order } from '../../shared/models/types';
+import { Address, Order } from '../../shared/models/types';
 import { AuthService } from '../../shared/services/auth.service';
 
 @Component({
@@ -17,7 +17,11 @@ import { AuthService } from '../../shared/services/auth.service';
 export class CartComponent implements OnInit {
   cart: CartItem[] = [];
   email: string = 'user123@email.com';
-  deliveryAddress: string = '123 Main St, City, Country';
+  deliveryAddress: Address = {
+    town: '',
+    street: '',
+    number: '',
+  };
   order: Order | null = null;
   isLoggedIn: boolean = false;
 
@@ -76,7 +80,6 @@ export class CartComponent implements OnInit {
       status: 'pending',
       orderDate: new Date().toISOString(),
       deliveryAddress: this.deliveryAddress,
-      paymentStatus: 'pending',
     };
     this.order = newOrder;
     console.log('Order placed:', this.order);
