@@ -4,5 +4,6 @@ This project was generated using [Angular CLI](https://github.com/angular/angula
 
 host: https://food-ordering-app-72391.web.app
 
+crudhoz admin: szia@szia.com pw:sziaszia
 
 Téma: 	Online ételrendelés
